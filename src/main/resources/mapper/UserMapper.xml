@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.springbootshiro.mapper.UserMapper">
+
+    <!--<resultMap id="userInfo" type="com.ch.springbootshiro.po.User">-->
+        <!--<result column="username" javaType="string" property="userName"></result>-->
+        <!--<result column="password" jdbcType="Array" property="password"></result>-->
+        <!--<result column="password_salt" jdbcType="string" property="passwordSalt"></result>-->
+        <!--<result column="status" jdbcType="string" property="status"></result>-->
+    <!--</resultMap>-->
+    <select id="findUserByUserNameAndStatus" resultType="com.ch.springbootshiro.po.User">
+        select * from users where username=#{username}
+        <if test="#{status==null}">and status ='1'</if>
+    </select>
+
+</mapper>

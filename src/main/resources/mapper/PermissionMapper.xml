@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.springbootshiro.mapper.PermissionMapper">
+
+    <select id="findUserPermissionListByUserName" resultType="com.ch.springbootshiro.po.Permission"
+            parameterType="string">
+      select pe.id ,pe.permission  from users us
+        inner join user_roles ur
+        on us.id=ur.user_id
+        inner join roles ro
+        on ur.role_id=ro.id
+        inner join roles_permissions rp
+        on ro.id=rp.role_id
+        inner join permissions pe
+        on rp.permission_id=pe.id
+      where us.username=#{userName}
+    </select>
+
+</mapper>

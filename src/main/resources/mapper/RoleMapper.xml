@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.springbootshiro.mapper.RoleMapper">
+
+    <select id="findUserRoleListByUserName" resultType="com.ch.springbootshiro.po.Role" parameterType="string">
+      select ro.id ,ro.role  from users us
+        inner join user_roles ur
+        on us.id=ur.user_id
+        inner join roles ro
+        on ur.role_id=ro.id
+      where us.username=#{userName}
+    </select>
+
+</mapper>
