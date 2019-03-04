@@ -1,10 +1,12 @@
 package com.ch.springbootshiro.config;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SubjectDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,10 +72,14 @@ public class ShiroConfig {
      *创建WebSecurityManager
      * */
     @Bean
-    public DefaultWebSecurityManager securityManager(UserRealm userRealm,HashedCredentialsMatcher hashedCredentialsMatcher) {
+    public DefaultWebSecurityManager securityManager(UserRealm userRealm, HashedCredentialsMatcher hashedCredentialsMatcher, ShiroSessionRedisDao shiroSessionRedisDao) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-
         securityManager.setRealm(userRealm);
+
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();;
+        sessionManager.setSessionDAO(shiroSessionRedisDao);
+
+        securityManager.setSessionManager(sessionManager);
         userRealm.setCredentialsMatcher(hashedCredentialsMatcher);
         return securityManager;
     }

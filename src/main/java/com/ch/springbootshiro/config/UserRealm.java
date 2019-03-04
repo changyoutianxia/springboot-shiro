@@ -18,6 +18,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,6 +28,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class UserRealm extends AuthorizingRealm {
+    @Autowired
+    RedisTemplate redisTemplate;
     @Override
     public String getName() {
         return "customJdbcRealm";
@@ -65,4 +68,6 @@ public class UserRealm extends AuthorizingRealm {
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
+
+
 }
