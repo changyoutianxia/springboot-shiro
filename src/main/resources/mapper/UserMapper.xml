@@ -5,10 +5,10 @@
 <mapper namespace="com.ch.springbootshiro.mapper.UserMapper">
 
     <!--<resultMap id="userInfo" type="com.ch.springbootshiro.po.User">-->
-        <!--<result column="username" javaType="string" property="userName"></result>-->
-        <!--<result column="password" jdbcType="Array" property="password"></result>-->
-        <!--<result column="password_salt" jdbcType="string" property="passwordSalt"></result>-->
-        <!--<result column="status" jdbcType="string" property="status"></result>-->
+    <!--<result column="username" javaType="string" property="userName"></result>-->
+    <!--<result column="password" jdbcType="Array" property="password"></result>-->
+    <!--<result column="password_salt" jdbcType="string" property="passwordSalt"></result>-->
+    <!--<result column="status" jdbcType="string" property="status"></result>-->
     <!--</resultMap>-->
     <select id="findUserByUserNameAndStatus" resultType="com.ch.springbootshiro.po.User">
         select * from users where username=#{username}

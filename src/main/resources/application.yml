@@ -1,0 +1,77 @@
+server:
+  port: 81
+
+#mapper文件位置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  #打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    #开启驼峰规则
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.ch.springbootshiro**: debug
+
+
+spring:
+  application:
+    name: shirodemo
+  redis:
+    cluster:
+      nodes: 192.168.226.10:7001,192.168.226.10:7002,192.168.226.10:7003,192.168.226.10:7004,192.168.226.10:7005,192.168.226.10:7006
+      max-redirects: 3
+    password: redisClLearn
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 1
+    timeout: 1s
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    name: druidDataSource
+#数据jdbc驱动
+    druid:
+      driver-class.name:  com.mysql.cj.jdbc.Driver
+#url
+      url: jdbc:mysql://localhost:3306/learn?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+#username
+      username: root
+#password
+      password: mysqllearn
+#最小连接数
+      minIdle: 1
+#初始化创建连接数
+      initialSize: 1
+#最大初始化连接数
+      maxActive: 20
+#获取连接最大等待时间
+      maxWait: 6000
+#校验连接是否可用查询sql
+      validationQuery: select 1
+#校验查询超时时间
+      validationQueryTimeout: 3000
+#多久检查一次空闲连接
+      timeBetweenEvictionRunsMillis: 6000
+#连接的最小存活时间
+      minEvictableIdleTimeMillis: 300000
+#申请连接的时候检查是否可用
+      testOnBorrow: true
+#归还连接时候检查是否可用
+      testOnReturn: true
+#申请连接的时候如果空闲时间大于timeBetweenEvictionRunsMillis 执行validationQuery来检查是否有效
+      testWhileIdle: true
+#拦截器wall 防止sql 注入
+      filter: stat,wall,slf4j
+
+#数据库连接配置 end
+
+# mybatis配置 end
+#设置shiro session 共享前缀
+cn.chang.shiro.session.redis:
+  shiroSessionPrefix: "shiro_sessio:"
+cn.chang.shiro.user.realm:
+  principalPrefix: "shiro_principal:"
+  permissionPrefix: "shiro_permission:"
+  rolePrefix: "shiro_role:"
